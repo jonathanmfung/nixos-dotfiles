@@ -69,7 +69,6 @@
 
   programs.sway.enable = true;
   xdg.portal.wlr.enable = true;
-  services.emacs.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -79,7 +78,7 @@
     ispell
 
     dunst
-    light
+    brightnessctl
     gammastep
     imv
     mpd
@@ -93,6 +92,7 @@
     wdisplays
     ripgrep
     fuzzel
+    playerctl
 
     (emacsWithPackagesFromUsePackage {
       config = ./init.el;

@@ -26,7 +26,7 @@ rec {
 
   wayland.windowManager.sway = {
     enable = true;
-    config = {
+    config = rec {
       output = {
         "*" = {
           bg = "#a5b2bf solid_color";
@@ -46,7 +46,9 @@ rec {
         };
       };
 
+      ################################################
       modifier = "Mod4";
+      floating.modifier = modifier;
       left = "h";
       down = "j";
       up = "k";
@@ -55,10 +57,91 @@ rec {
 
       input = {
         "type:keyboard" = {
-          repeat_delay = "250";
+          repeat_delay = "200";
           repeat_rate = "40";
         };
       };
+
+      keybindings = {
+        "${modifier}+Return" = "exec ${pkgs.foot}/bin/foot";
+        "${modifier}+Shift+Return" = "exec ${pkgs.foot}/bin/foot -a 'floating'";
+        "${modifier}+Shift+q" = "kill";
+
+        "${modifier}+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
+        "${modifier}+Shift+d" = "exec ./toggle_menu.sh"; # TODO
+
+        XF86AudioMute = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
+        XF86AudioLowerVolume = "exec pactl set-sink-volume @DEFAULT_SINK@ -2%";
+        XF86AudioRaiseVolume = "exec pactl set-sink-volume @DEFAULT_SINK@ +2%";
+        XF86AudioPlay = "exec playerctl -p spotify play-pause";
+        XF86AudioPrev = "exec playerctl -p spotify previous";
+        XF86AudioNext = "exec playerctl -p spotify next";
+
+        XF86MonBrightnessDown = "exec brightnessctl s 1%-";
+        XF86MonBrightnessUp = "exec brightnessctl s 1%+";
+
+        "${modifier}+Shift+r" = "reload";
+        "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
+
+        "${modifier}+${left}" = "focus left";
+        "${modifier}+${down}" = "focus down";
+        "${modifier}+${up}" = "focus up";
+        "${modifier}+${right}" = "focus right";
+        "${modifier}+Shift+${left}" = "move left";
+        "${modifier}+Shift+${down}" = "move down";
+        "${modifier}+Shift+${up}" = "move up";
+        "${modifier}+Shift+${right}" = "move right";
+
+        "${modifier}+1" = "workspace number 1";
+        "${modifier}+2" = "workspace number 2";
+        "${modifier}+3" = "workspace number 3";
+        "${modifier}+4" = "workspace number 4";
+        "${modifier}+5" = "workspace number 5";
+        "${modifier}+6" = "workspace number 6";
+        "${modifier}+7" = "workspace number 7";
+        "${modifier}+8" = "workspace number 8";
+        "${modifier}+9" = "workspace number 9";
+        "${modifier}+0" = "workspace number 10";
+
+        "${modifier}+Shift+1" = "move container to workspace number 1";
+        "${modifier}+Shift+2" = "move container to workspace number 2";
+        "${modifier}+Shift+3" = "move container to workspace number 3";
+        "${modifier}+Shift+4" = "move container to workspace number 4";
+        "${modifier}+Shift+5" = "move container to workspace number 5";
+        "${modifier}+Shift+6" = "move container to workspace number 6";
+        "${modifier}+Shift+7" = "move container to workspace number 7";
+        "${modifier}+Shift+8" = "move container to workspace number 8";
+        "${modifier}+Shift+9" = "move container to workspace number 9";
+        "${modifier}+Shift+0" = "move container to workspace number 10";
+
+        "${modifier}+b" = "splith";
+        "${modifier}+v" = "splitv";
+        "${modifier}+s" = "layout stacking";
+        "${modifier}+w" = "layout tabbed";
+        "${modifier}+e" = "layout toggle split";
+        "${modifier}+f" = "fullscreen";
+
+        "${modifier}+space" = "focus mode_toggle";
+        "${modifier}+Shift+space" = "floating toggle";
+        "${modifier}+a" = "focus parent";
+
+        "${modifier}+minus" = "scratchpad show";
+        "${modifier}+Shift+minus" = "move scratchpad";
+        "${modifier}+tab" = "workspace back_and_forth";
+        "${modifier}+Shift+v" = "move workspace to output up";
+        "${modifier}+Shift+c" = "move workspace to output right";
+
+        "${modifier}+ctrl+Return" = "exec emacs";
+      };
+
+      ################################################
+      window = {
+        border = 3;
+      };
+      floating.criteria = [
+        { app_id = "floating"; }
+        { title = "floating"; }
+      ];
       colors.focused = {
         border = "#ffffff";
         background = "#ffffff";
@@ -74,6 +157,10 @@ rec {
       };
       bars = [ { command = "${pkgs.waybar}/bin/waybar"; } ];
     };
+    extraConfig = ''
+    title_align center
+    font "Iosevka Custom" 9
+    '';
   };
 
   programs.waybar = {
