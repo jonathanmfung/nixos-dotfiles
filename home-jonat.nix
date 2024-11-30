@@ -135,9 +135,6 @@ rec {
       };
 
       ################################################
-      window = {
-        border = 3;
-      };
       floating.criteria = [
         { app_id = "floating"; }
         { title = "floating"; }
@@ -157,9 +154,11 @@ rec {
       };
       bars = [ { command = "${pkgs.waybar}/bin/waybar"; } ];
     };
+    # TODO Use iosevka.privateBuildPlan.family
     extraConfig = ''
-    title_align center
-    font "Iosevka Custom" 9
+      default_border pixel 3
+      title_align center
+      font "Iosevka Custom" 9
     '';
   };
 
@@ -619,6 +618,21 @@ rec {
         lines = 10;
         width = 40;
         vertical-pad = 20;
+      };
+      colors = {
+        background = "ffffffff";
+        text = "707070ff";
+        prompt = "000000ff";
+        input = "000000ff";
+        match = "ff7c00ff";
+        selection = "00bfe0ff";
+        selection-text = "ffffffff";
+        selection-match = "ff7c00ff";
+        border = "707070ff";
+      };
+      border = {
+        width = 4;
+        radius = 0;
       };
     };
   };
