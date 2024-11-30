@@ -389,6 +389,7 @@ Discovered window-parameter from https://oremacs.com/2015/03/12/ace-window-displ
        `(nano-modeline-active ((,c)))
        `(nano-modeline-status-** ((,c :background ,bg-red-intense)))
        `(nano-modeline-status-RW ((,c :background ,bg-blue-intense)))
+       `(magit-diff-context-highlight ((,c :background ,bg-cyan-nuanced)))
 
        `(window-divider ((,c :background ,bg-main :foreground ,border)))
        `(fringe ((,c :background ,fringe :foreground ,fg-main))))
