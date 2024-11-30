@@ -33,7 +33,6 @@
 
 ;; org-mode
 (setq org-use-extra-keys t)
-(setq org-use-extra-keys t)
 
 (use-package nix-mode
   :hook (before-save . nix-format-before-save))
@@ -114,6 +113,7 @@ Meant to be used with emacsclient'"
 
 (electric-pair-mode 1)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 
 (use-package emacs
   :ensure nil
