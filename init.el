@@ -35,7 +35,8 @@
 (setq org-use-extra-keys t)
 (setq org-use-extra-keys t)
 
-(use-package nix-mode)
+(use-package nix-mode
+  :hook (before-save . nix-format-before-save))
 
 ;;; Inits
 ;; Code:
