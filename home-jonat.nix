@@ -82,18 +82,18 @@ rec {
         "${modifier}+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
         "${modifier}+Shift+d" = "exec ./toggle_menu.sh"; # TODO
 
-        XF86AudioMute = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
-        XF86AudioLowerVolume = "exec pactl set-sink-volume @DEFAULT_SINK@ -2%";
-        XF86AudioRaiseVolume = "exec pactl set-sink-volume @DEFAULT_SINK@ +2%";
-        XF86AudioPlay = "exec playerctl -p spotify play-pause";
-        XF86AudioPrev = "exec playerctl -p spotify previous";
-        XF86AudioNext = "exec playerctl -p spotify next";
+        XF86AudioMute = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
+        XF86AudioLowerVolume = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -2%";
+        XF86AudioRaiseVolume = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +2%";
+        XF86AudioPlay = "exec ${pkgs.pulseaudio}/bin/playerctl -p spotify play-pause";
+        XF86AudioPrev = "exec ${pkgs.pulseaudio}/bin/playerctl -p spotify previous";
+        XF86AudioNext = "exec ${pkgs.pulseaudio}/bin/playerctl -p spotify next";
 
-        XF86MonBrightnessDown = "exec brightnessctl s 1%-";
-        XF86MonBrightnessUp = "exec brightnessctl s 1%+";
+        XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl s 1%-";
+        XF86MonBrightnessUp = "exec ${pkgs.brightnessctl}/bin/brightnessctl s 1%+";
 
         "${modifier}+Shift+r" = "reload";
-        "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
+        "${modifier}+Shift+e" = "exec ${pkgs.sway}/bin/swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
 
         "${modifier}+${left}" = "focus left";
         "${modifier}+${down}" = "focus down";
