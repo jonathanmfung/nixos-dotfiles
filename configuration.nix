@@ -97,13 +97,6 @@
     firefox
     spotify
     zotero_7
-
-    (emacsWithPackagesFromUsePackage {
-      config = ./init.el;
-      defaultInitFile = true;
-      package = emacs-unstable-pgtk;
-      alwaysEnsure = true;
-    })
   ];
 
   fonts.packages = with pkgs; [
@@ -142,6 +135,15 @@
   # };
 
   # List services that you want to enable:
+  services.emacs.enable = true;
+  services.emacs.package = (
+    pkgs.emacsWithPackagesFromUsePackage {
+      config = ./init.el;
+      defaultInitFile = true;
+      package = pkgs.emacs-unstable-pgtk;
+      alwaysEnsure = true;
+    }
+  );
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

@@ -143,7 +143,8 @@ rec {
         "${modifier}+Shift+v" = "move workspace to output up";
         "${modifier}+Shift+c" = "move workspace to output right";
 
-        "${modifier}+ctrl+Return" = "exec emacs";
+        # TODO using ${pkgs.emacs}/bin/emacsclient launches in Xwayland
+        "${modifier}+ctrl+Return" = "exec emacsclient -c";
       };
 
       ################################################

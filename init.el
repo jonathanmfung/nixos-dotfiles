@@ -4,6 +4,7 @@
 (setq use-package-ensure-function 'ignore)
 
 (setq inhibit-startup-screen t)
+(setq inhibit-startup-message t)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -1135,7 +1136,9 @@ https://cundy.me/post/elfeed/"
   ;; 241023: CMAKE only respects TERM to output color (clang -fcolor-diagnostics did not work)
   ;; Using fancy-compilation package would work on `compile` and `recompile` in *compilation* buffer,
   ;; but not `recompile` in other window.
-  (setq compilation-environment '("TERM=TERM=xterm-256color")))
+  (setq compilation-environment '("TERM=TERM=xterm-256color"))
+  (setq compilation-scroll-output t)
+  (setq compilation-auto-jump-to-first-error t))
 
 (use-package ansi-color
   :ensure nil
@@ -1327,11 +1330,9 @@ https://cundy.me/post/elfeed/"
   (csv-mode . (lambda () (visual-line-mode -1) (toggle-truncate-lines 1))))
 
 ;;;; C++
-;; (use-package clang-format
-;;   :ensure nil
-;;   :load-path "/usr/share/clang/" ; clang-format.el
-;;   :init
-;;   (setq clang-format-style "Mozilla"))
+(use-package clang-format
+  :init
+  (setq clang-format-style "Mozilla"))
 
 ;;;; gdb
 (use-package emacs
