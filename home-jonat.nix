@@ -14,6 +14,7 @@ rec {
     shellAliases = {
       l = "ls -a --color=auto";
       lss = "ls -hAlt -gG --color=auto";
+      up = ''uptime | awk -F'( |,|:)+' '{print $6,$7",",$8,"hours,",$9,"minutes"}' '';
       nrs = "sudo nixos-rebuild switch -I nixos-config=${home.homeDirectory}/nixos-dotfiles/configuration.nix";
     };
   };
