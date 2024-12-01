@@ -13,7 +13,7 @@ rec {
     };
     shellAliases = {
       l = "ls -a --color=auto";
-      lss = "ls -hal -gG --color=auto";
+      lss = "ls -hAlt -gG --color=auto";
       nrs = "sudo nixos-rebuild switch -I nixos-config=${home.homeDirectory}/nixos-dotfiles/configuration.nix";
     };
   };
