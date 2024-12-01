@@ -71,28 +71,29 @@
   xdg.portal.wlr.enable = true;
 
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     git
-    nixfmt-rfc-style
+
     sbcl
+    nixfmt-rfc-style
+
     ispell
+    ripgrep
 
     dunst
     brightnessctl
+    playerctl
     gammastep
     imv
     mpd
     mpv
     waybar
-    zathura
-
-    firefox
-    spotify
+    fuzzel
 
     wdisplays
-    ripgrep
-    fuzzel
-    playerctl
+    zathura
+    firefox
+    spotify
 
     (emacsWithPackagesFromUsePackage {
       config = ./init.el;
