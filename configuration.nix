@@ -75,6 +75,7 @@
     git
 
     sbcl
+    clang-tools
     nixfmt-rfc-style
 
     ispell
@@ -90,10 +91,12 @@
     waybar
     fuzzel
 
+    pavucontrol
     wdisplays
     zathura
     firefox
     spotify
+    zotero_7
 
     (emacsWithPackagesFromUsePackage {
       config = ./init.el;
