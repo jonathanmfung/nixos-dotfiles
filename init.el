@@ -249,6 +249,9 @@ https://github.com/minad/vertico/issues/65#issuecomment-875094896"
           (when-let (project (project-current))
             (car (project-roots project))))))
 
+;;;; coalton-xref-stack
+(use-package consult-xref-stack
+  :bind (("C-," . consult-xref-stack-backward)))
 ;;;; Which-key
 (use-package which-key
   :init
@@ -1236,6 +1239,8 @@ https://cundy.me/post/elfeed/"
 (use-package cider)
 ;;;; Guile + geiser
 (use-package geiser-guile)
+;;;; coalton-mode
+(use-package coalton-mode)
 ;;;; Haskell
 (use-package haskell-mode
   :init
