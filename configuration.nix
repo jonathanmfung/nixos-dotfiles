@@ -75,6 +75,8 @@
     git
 
     sbcl
+    gnumake
+    cmake
     clang-tools
     nixfmt-rfc-style
 
