@@ -46,15 +46,21 @@ rec {
         # Framework Laptop Screen
         "eDP-1" = {
           resolution = "2256x1504";
-          position = "208,1080";
+          position = "1290,1724";
           scale = "1.5";
         };
-
         # Philips 4k
         "DP-9" = {
           resolution = "3840x2160";
-          position = "0,0";
+          position = "1080,644";
           scale = "2.0";
+        };
+        # Vertical LG
+        "DP-2" = {
+          resolution = "1920x1080";
+          position = "0,0";
+          scale = "1.0";
+          transform = "90";
         };
       };
 
