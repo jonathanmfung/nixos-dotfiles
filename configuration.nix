@@ -77,12 +77,14 @@
 
     # Langs
     sbcl
+    python3
 
     # Tooling
     gnumake
     cmake
     clang-tools
     nixfmt-rfc-style
+    poetry
 
     # Utils - CLI
     ispell
