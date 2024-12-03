@@ -657,6 +657,9 @@ rec {
     };
   };
 
+  # TODO: Add dunst
+  # TODO: Add zathura
+
   services.gammastep = {
     enable = true;
     latitude = 34.03;

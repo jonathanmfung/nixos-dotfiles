@@ -98,6 +98,8 @@
     zathura
     firefox
     spotify
+    # https://retorque.re/zotero-better-bibtex/installation/
+    # https://github.com/syt2/zotero-scipdf
     zotero_7
   ];
 
