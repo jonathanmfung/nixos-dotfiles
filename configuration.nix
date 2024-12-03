@@ -71,28 +71,35 @@
   xdg.portal.wlr.enable = true;
 
   environment.systemPackages = with pkgs; [
+    # Dev
     vim
     git
 
+    # Langs
     sbcl
+
+    # Tooling
     gnumake
     cmake
     clang-tools
     nixfmt-rfc-style
 
+    # Utils - CLI
     ispell
     ripgrep
-
     dunst
     brightnessctl
     playerctl
     gammastep
+
+    # Utils - GUI
     imv
     mpd
     mpv
     waybar
     fuzzel
 
+    # Programs
     pavucontrol
     wdisplays
     zathura
