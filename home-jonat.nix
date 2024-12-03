@@ -86,7 +86,7 @@ rec {
         "${modifier}+Shift+q" = "kill";
 
         "${modifier}+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
-        "${modifier}+Shift+d" = "exec ./toggle_menu.sh"; # TODO
+        "${modifier}+Shift+d" = "exec ./toggle_menu.sh"; # TODO: custom menu
 
         XF86AudioMute = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
         XF86AudioLowerVolume = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -2%";
@@ -149,7 +149,7 @@ rec {
         "${modifier}+Shift+v" = "move workspace to output up";
         "${modifier}+Shift+c" = "move workspace to output right";
 
-        # TODO using ${pkgs.emacs}/bin/emacsclient launches in Xwayland
+        # TODO: using ${pkgs.emacs}/bin/emacsclient launches in Xwayland
         "${modifier}+ctrl+Return" = "exec emacsclient -c";
       };
 
@@ -157,6 +157,7 @@ rec {
       floating.criteria = [
         { app_id = "floating"; }
         { title = "floating"; }
+        # TODO: add firefox Picture-in-Picture
       ];
       colors.focused = {
         border = "#ffffff";
@@ -173,7 +174,7 @@ rec {
       };
       bars = [ { command = "${pkgs.waybar}/bin/waybar"; } ];
     };
-    # TODO Use iosevka.privateBuildPlan.family
+    # TODO: Use iosevka.privateBuildPlan.family
     extraConfig = ''
       default_border pixel 3
       title_align center
@@ -214,7 +215,7 @@ rec {
         format = "V: {volume}%";
         format-bluetooth = "V: {volume}%  {format_source}";
         format-bluetooth-muted = " {icon} {format_source}";
-        format-muted = " ";
+        format-muted = "muted";
         format-source = "{volume}% ";
         format-source-muted = "";
         format-icons = {

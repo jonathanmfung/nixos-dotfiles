@@ -1108,6 +1108,14 @@ https://cundy.me/post/elfeed/"
   :config
   (setq auth-sources '("~/.authinfo")))
 
+;;;; magit-todos
+(use-package magit-todos
+  :after magit
+  :config
+  (setq magit-todos-auto-group-items 10)
+  (setq magit-todos-group-by '(magit-todos-item-first-path-component magit-todos-item-filename))
+  (magit-todos-mode 1))
+
 ;;;; eglot
 (use-package eglot
   :ensure nil
