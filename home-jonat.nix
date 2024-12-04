@@ -26,6 +26,7 @@ rec {
       lss = "ls -hAlt -gG --color=auto";
       # https://stackoverflow.com/a/28353785
       up = ''uptime | awk -F'( |,|:)+' '{d=h=m=0; if ($7=="min") m=$6; else {if ($7~/^day/) {d=$6;h=$8;m=$9} else {h=$6;m=$7}}} {print d+0,"days,",h+0,"hours,",m+0,"minutes."}' '';
+      nix-repl = "nix repl --expr 'import <nixpkgs>{}'";
       nrs = "sudo nixos-rebuild switch -I nixos-config=${home.homeDirectory}/nixos-dotfiles/configuration.nix";
     };
   };
