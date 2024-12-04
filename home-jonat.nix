@@ -31,6 +31,16 @@ rec {
     };
   };
 
+  programs.starship = {
+    enable = true;
+    settings = {
+      git_branch.format = "\\[[$branch]($style)\\]";
+      git_status.format = "([\\[$all_status$ahead_behind\\]]($style))";
+      cmake.format = "\\[[cmake]($style)\\]";
+      python.format = "[\\[py]($style)\\]";
+    };
+  };
+
   programs.git = {
     enable = true;
     userEmail = "jonathanfung2000@gmail.com";
