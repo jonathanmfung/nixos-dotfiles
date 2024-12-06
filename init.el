@@ -1353,10 +1353,7 @@ https://cundy.me/post/elfeed/"
   :config (setq gdb-many-windows t))
 
 ;;;; CMake
-;; (use-package cmake-mode
-;;   :ensure nil
-;;   :load-path "/usr/share/emacs/site-lisp" ; cmake-mode.el
-;;   )
+(use-package cmake-mode)
 
 ;;; Navigation
 ;; (use-package avy
