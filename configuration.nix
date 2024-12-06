@@ -87,6 +87,7 @@
     poetry
 
     # Utils - CLI
+    ffmpeg-full
     ispell
     ripgrep
     dunst
