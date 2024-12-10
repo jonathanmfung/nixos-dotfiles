@@ -66,6 +66,11 @@ rec {
           position = "1080,644";
           scale = "2.0";
         };
+        "DP-10" = {
+          resolution = "3840x2160";
+          position = "1080,644";
+          scale = "2.0";
+        };
         # Vertical LG
         "DP-2" = {
           resolution = "1920x1080";
