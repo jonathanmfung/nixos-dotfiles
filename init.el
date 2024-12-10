@@ -1148,8 +1148,7 @@ https://cundy.me/post/elfeed/"
   ;; Using fancy-compilation package would work on `compile` and `recompile` in *compilation* buffer,
   ;; but not `recompile` in other window.
   (setq compilation-environment '("TERM=TERM=xterm-256color"))
-  (setq compilation-scroll-output t)
-  (setq compilation-auto-jump-to-first-error t))
+  (setq compilation-scroll-output t))
 
 (use-package ansi-color
   :ensure nil
