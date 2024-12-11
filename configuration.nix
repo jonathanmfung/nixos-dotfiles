@@ -108,6 +108,8 @@
     zathura
     firefox
     spotify
+    zoom-us
+    syncthing
     # https://retorque.re/zotero-better-bibtex/installation/
     # https://github.com/syt2/zotero-scipdf
     zotero_7
