@@ -1483,9 +1483,8 @@ https://cundy.me/post/elfeed/"
 
 ;;; multiple-cursors
 (use-package multiple-cursors
-  :bind (("C->" . 'mc/mark-next-symbol-like-this)
-	 ("C-<" . 'mc/mark-previous-symbol-like-this)
-	 ("C-c C-," . 'mc/mark-all-symbols-like-this))
+  :bind (("C->" . 'mc/mark-next-like-this)
+	 ("C-<" . 'mc/mark-previous-like-this))
   :bind (:map mc/keymap ("<return>" . nil)))
 
 ;;; expand-region
@@ -1504,7 +1503,7 @@ https://cundy.me/post/elfeed/"
   (defun pulse-line (&rest _)
     "Pulse the current line."
     (pulse-momentary-highlight-one-line (point)))
-  (dolist (command '(scroll-up-command scroll-down-command recenter-top-bottom other-window ace-window))
+  (dolist (command '(scroll-up-command scroll-down-command recenter-top-bottom other-window ace-window magit-todos--goto-item))
     (advice-add command :after #'pulse-line)))
 
 ;;; flycheck
