@@ -121,6 +121,7 @@
     noto-fonts-emoji
     (iosevka.override {
       privateBuildPlan = {
+        # TODO: Rename to Iosevka SS14?
         family = "Iosevka Custom";
         spacing = "normal";
         serifs = "sans";
@@ -132,6 +133,15 @@
       };
       set = "SS14";
     })
+    # TODO: Add privateBuildPlan for Iosevka Etoile
+    # [buildPlans.IosevkaCustom]
+    # family = "Iosevka Custom"
+    # spacing = "quasi-proportional"
+    # serifs = "slab"
+    # noCvSs = true
+    # exportGlyphNames = false
+    # [buildPlans.IosevkaCustom.variants]
+    # inherits = "ss14"
   ];
 
   nixpkgs.overlays = [
