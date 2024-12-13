@@ -94,6 +94,7 @@
     brightnessctl
     playerctl
     gammastep
+    yt-dlp
 
     # Utils - GUI
     imv
