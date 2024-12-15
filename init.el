@@ -1548,6 +1548,15 @@ https://cundy.me/post/elfeed/"
 	       '(tiny pid tree pcpu pmem start time comm))
   (setq-default proced-format 'tiny))
 
+;;; empv
+(use-package empv
+  :config
+  (bind-key "C-x m" empv-map)
+  (setq empv-audio-dir "~/music")
+  :bind
+  (:map empv-map
+	(("m" . empv-toggle))))
+
 ;;; Toggles
 ;; f5 is modus-themes-toggle
 ;; f7 is jf/hydra-resize-window--helper
