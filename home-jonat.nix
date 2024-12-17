@@ -50,6 +50,7 @@ rec {
   };
 
   wayland.windowManager.sway = {
+    # TODO: Add resize mode & keybinds
     enable = true;
     config = rec {
       output = {
@@ -649,7 +650,11 @@ rec {
     enable = true;
     bindings = {
       s = "ignore";
-      r = "cycle_values video-rotate 90 180 270 0";
+      R = "cycle_values video-rotate 90 180 270 0";
+    };
+    config = {
+      "sub-outline-color" = "0/0.6";
+      "sub-border-style" = "opaque-box";
     };
   };
 
