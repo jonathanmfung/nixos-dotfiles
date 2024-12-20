@@ -3,7 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  #config,
+  config,
   pkgs,
   ...
 }:
@@ -62,7 +62,10 @@
     packages = with pkgs; [ ];
   };
 
-  home-manager.users.jonat = import ./home-jonat.nix;
+  home-manager.users.jonat = import ./home-jonat.nix {
+    inherit config;
+    inherit pkgs;
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -151,6 +154,18 @@
         url = "https://github.com/nix-community/emacs-overlay/archive/7c0720d624aae2b9ab356e3e858a2490bce1b822.tar.gz";
       }
     ))
+
+    # Custom Scripts
+    (final: prev: {
+      menu = (
+        final.writeShellApplication (
+          import ./scripts/menu.nix {
+            inherit (final) fuzzel;
+            inherit (final) wtype;
+          }
+        )
+      );
+    })
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
