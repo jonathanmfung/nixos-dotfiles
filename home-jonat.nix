@@ -651,6 +651,12 @@ rec {
     bindings = {
       s = "ignore";
       R = "cycle_values video-rotate 90 180 270 0";
+      "-" = "add video-zoom -0.25";
+      "=" = "add video-zoom 0.25";
+      "Alt+h" = "add video-pan-x 0.05";
+      "Alt+j" = "add video-pan-y -0.05";
+      "Alt+k" = "add video-pan-y 0.05";
+      "Alt+l" = "add video-pan-x -0.05";
     };
     config = {
       "sub-outline-color" = "0/0.6";
