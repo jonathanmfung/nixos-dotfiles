@@ -1552,8 +1552,9 @@ https://cundy.me/post/elfeed/"
 
 ;;; empv
 (use-package empv
-  :config
+  :init
   (bind-key "C-x m" empv-map)
+  :config
   (setq empv-audio-dir "~/music")
   :bind
   (:map empv-map
