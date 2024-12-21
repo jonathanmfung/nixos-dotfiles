@@ -159,8 +159,10 @@ https://github.com/minad/vertico/issues/65#issuecomment-875094896"
 
 ;;;; Savehist
 (use-package savehist
+  :ensure nil
   :init
   (savehist-mode))
+
 ;;;; Marginalia
 (use-package marginalia
   :init
