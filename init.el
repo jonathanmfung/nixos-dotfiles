@@ -470,6 +470,7 @@ Discovered window-parameter from https://oremacs.com/2015/03/12/ace-window-displ
   (setq org-ellipsis " »")
   (setq org-edit-src-content-indentation 0)
   (setq org-preview-latex-default-process 'dvisvgm) ;https://stackoverflow.com/a/43943452
+  (setq org-latex-packages-alist '(("" "amsmath" t)))
   (plist-put org-format-latex-options :scale 1.1)
   (plist-put org-format-latex-options :foreground nil)
   (plist-put org-format-latex-options :background nil)

@@ -98,6 +98,7 @@
     playerctl
     gammastep
     yt-dlp
+    texliveFull
 
     # Utils - GUI
     imv
