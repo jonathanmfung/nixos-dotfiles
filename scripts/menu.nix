@@ -1,16 +1,16 @@
 {
-  fuzzel,
-  wtype,
+  gum,
+  wl-clipboard,
 }:
 {
   name = "menu";
   runtimeInputs = [
-    fuzzel
-    wtype
+    gum
+    wl-clipboard
   ];
   text = ''
     confirm () {
-        opt=$(echo -e "No\nYes" | fuzzel -d --prompt="Confirm $1: " -l 2)
+        opt=$(gum choose --no-show-help No Yes --header="Confirm:")
         case $opt in
     	No)
     	    echo "Cancelling $1";;
@@ -22,7 +22,7 @@
     }
 
     power_menu () {
-        opt=$(echo -e "Sleep\nSuspend\nHibernate\nShutdown" | fuzzel -d --prompt="Power: " -l 4)
+        opt=$(gum choose --no-show-help Sleep Suspend Hibernate Shutdown --header="Power:")
         case $opt in
     	Sleep)
     	    systemctl sleep;;
@@ -31,26 +31,26 @@
     	Hibernate)
     	    systemctl hibernate;;
     	Shutdown)
-    	    systemctl shutdown;;
+    	    gum confirm "Shutdown?" && systemctl shutdown;;
     	*)
     	    echo "Invalid option $opt";;
         esac
     }
 
     link_menu () {
-        opt=$(echo -e "LinkedIn\nPersonal" | fuzzel -d --prompt="Link: " -l 2)
+        opt=$(gum choose --no-show-help LinkedIn Personal --header="Link:")
         case $opt in
     	LinkedIn)
-    	    wtype "https://www.linkedin.com/in/jonathanmfung";;
+    	    wl-copy "https://www.linkedin.com/in/jonathanmfung";;
     	Personal)
-    	    wtype "https://jonathanmfung.github.io";;
+    	    wl-copy "https://jonathanmfung.github.io";;
     	*)
     	    echo "Invalid option $opt";;
         esac
     }
 
     main_menu (){
-        opt=$(echo -e "Power\nLink" | fuzzel -d --prompt="Menu: " -l 2)
+        opt=$(gum choose --no-show-help Power Link --header="Menu:")
         case $opt in
     	Link)
     	    link_menu;;

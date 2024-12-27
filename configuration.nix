@@ -162,8 +162,8 @@
       menu = (
         final.writeShellApplication (
           import ./scripts/menu.nix {
-            inherit (final) fuzzel;
-            inherit (final) wtype;
+            inherit (final) gum;
+            inherit (final) wl-clipboard;
           }
         )
       );
