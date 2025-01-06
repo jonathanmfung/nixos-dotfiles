@@ -962,6 +962,7 @@ org-export properly converts denote links."
   :ensure auctex
   :config
   (setq TeX-auto-save t)
+  (setq TeX-electric-math (cons "\\(" "\\)"))
   (add-to-list 'TeX-view-program-selection '(output-pdf "Zathura"))
   (setq tex-chktex-program nil)
   :hook
