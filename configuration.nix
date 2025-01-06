@@ -99,6 +99,7 @@
     gammastep
     yt-dlp
     texliveFull
+    gum
 
     # Utils - GUI
     imv
