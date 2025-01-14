@@ -19,7 +19,7 @@
     	Hibernate)
     	    systemctl hibernate;;
     	Shutdown)
-    	    gum confirm --no-show-help "Shutdown?" && systemctl shutdown;;
+    	    gum confirm --no-show-help "Shutdown?" && shutdown now;;
     	*)
     	    echo "Invalid option $opt";;
         esac
