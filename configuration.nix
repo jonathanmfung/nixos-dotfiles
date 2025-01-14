@@ -100,6 +100,7 @@
     yt-dlp
     texliveFull
     gum
+    killall
 
     # Utils - GUI
     imv
@@ -120,6 +121,8 @@
     # https://github.com/syt2/zotero-scipdf
     zotero_7
     qbittorrent
+
+    # TODO: nix-direnv + emacs envrc
   ];
 
   fonts.packages = with pkgs; [
