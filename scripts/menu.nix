@@ -9,18 +9,6 @@
     wl-clipboard
   ];
   text = ''
-    confirm () {
-        opt=$(gum choose --no-show-help No Yes --header="Confirm:")
-        case $opt in
-    	No)
-    	    echo "Cancelling $1";;
-    	Yes)
-    	    $1;;
-    	*)
-    	    echo "Invalid option $opt";;
-        esac
-    }
-
     power_menu () {
         opt=$(gum choose --no-show-help Sleep Suspend Hibernate Shutdown --header="Power:")
         case $opt in
@@ -31,7 +19,7 @@
     	Hibernate)
     	    systemctl hibernate;;
     	Shutdown)
-    	    gum confirm "Shutdown?" && systemctl shutdown;;
+    	    gum confirm --no-show-help "Shutdown?" && systemctl shutdown;;
     	*)
     	    echo "Invalid option $opt";;
         esac
