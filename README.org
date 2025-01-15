@@ -3,3 +3,8 @@ My dotfiles, for nixos system configuration and home-manager user configuration.
 #+begin_src bash :noeval
 sudo nixos-rebuild switch -I nixos-config="$HOME/nixos-dotfiles/configuration.nix"
 #+end_src
+
+* Things that can't be configured in Nix
+- Zotero Plugins
+  - Sci-PDF
+  - Better BibTex for Zotero
