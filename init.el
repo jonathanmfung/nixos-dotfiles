@@ -23,8 +23,7 @@
   (when (display-graphic-p)
     (set-face-attribute 'default nil :font "Iosevka Custom" :height jf/default-font-size)
     (set-face-attribute 'fixed-pitch nil :font "Iosevka Custom" :height jf/default-font-size)
-    ;; TODO Install Iosevka Aile
-    ;; (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height jf/default-variable-font-size)
+    (set-face-attribute 'variable-pitch nil :font "Iosevka Etoile" :height jf/default-variable-font-size)
     ))
 
 ;; run this hook after we have initialized the first time

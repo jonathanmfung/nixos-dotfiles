@@ -144,15 +144,19 @@
       };
       set = "SS14";
     })
-    # TODO: Add privateBuildPlan for Iosevka Etoile
-    # [buildPlans.IosevkaCustom]
-    # family = "Iosevka Custom"
-    # spacing = "quasi-proportional"
-    # serifs = "slab"
-    # noCvSs = true
-    # exportGlyphNames = false
-    # [buildPlans.IosevkaCustom.variants]
-    # inherits = "ss14"
+    (iosevka.override {
+      privateBuildPlan = {
+        family = "Iosevka Etoile";
+        spacing = "quasi-proportional";
+        serifs = "slab";
+        noCvSs = true;
+        exportGlyphNames = false;
+        variants = {
+          inherits = "ss14";
+        };
+      };
+      set = "SS14";
+    })
   ];
 
   nixpkgs.overlays = [
