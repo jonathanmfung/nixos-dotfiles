@@ -101,6 +101,7 @@
     texliveFull
     gum
     killall
+    file
 
     # Utils - GUI
     imv
