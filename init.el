@@ -208,7 +208,6 @@ https://github.com/minad/vertico/issues/65#issuecomment-875094896"
          ("M-\"" . consult-register)
          ;; Other custom bindings
          ("M-y" . consult-yank-pop)     ;; orig. yank-pop
-         ("<help> a" . consult-apropos) ;; orig. apropos-command
          ;; M-g bindings (goto-map)
          ("M-g e" . consult-compile-error)
          ("M-g g" . consult-goto-line)   ;; orig. goto-line
@@ -490,16 +489,10 @@ Discovered window-parameter from https://oremacs.com/2015/03/12/ace-window-displ
 
   ;; agenda
   ;; https://github.com/rougier/emacs-gtd
-  (setq org-agenda-files (list "~/HarmonyAnalytics/Inbox.org"
-			       "~/HarmonyAnalytics/Notes.org"
-			       "~/HarmonyAnalytics/Projects.org"))
+  (setq org-agenda-files (list "~/personal/inbox.org"))
   (setq org-capture-templates
-	`(("i" "Inbox" entry  (file "~/HarmonyAnalytics/Inbox.org")
-           ,(concat "* TODO %?\n"
-                    "/Entered on/ %U"))
-	  ("I" "Inbox" entry  (file "~/HarmonyAnalytics/Inbox.org")
-           ,(concat "* TODO Input \"%?\" Notes\n"
-                    "/Entered on/ %U"))))
+	`(("i" "Inbox" entry  (file "~/personal/inbox.org")
+           ,(concat "* %?\n" "/Entered on/ %U"))))
   (defun jf/org-capture-inbox ()
     (interactive)
     (call-interactively 'org-store-link)
@@ -508,7 +501,7 @@ Discovered window-parameter from https://oremacs.com/2015/03/12/ace-window-displ
     (interactive)
     (call-interactively 'org-store-link)
     (org-capture nil "I"))
-  (setq org-refile-targets `(("~/HarmonyAnalytics/Projects.org" :regexp . ,(regexp-opt '("Tasks")))))
+  (setq org-refile-targets `(("~/personal/projects.org" :regexp . ,(regexp-opt '("Tasks")))))
   (setq org-refile-use-outline-path 'file)
   (setq org-outline-path-complete-in-steps nil)
 
