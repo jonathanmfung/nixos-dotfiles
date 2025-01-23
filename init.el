@@ -1557,9 +1557,20 @@ https://cundy.me/post/elfeed/"
   (bind-key "C-x m" empv-map)
   :config
   (setq empv-audio-dir "~/music")
+
+  (defun jf/empv-toggle ()
+    (interactive)
+    (if (empv--running?)
+	(empv-toggle)
+      (progn (empv-play empv-audio-dir)
+	     (sit-for 0.01)
+	     (empv-playlist-shuffle)
+	     (sit-for 0.01)
+	     (empv-playlist-next))))
   :bind
   (:map empv-map
-	(("m" . empv-toggle))))
+	(("m" . jf/empv-toggle)
+	 ("v" . empv-set-volume))))
 
 ;;; Toggles
 ;; f5 is modus-themes-toggle
