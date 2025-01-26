@@ -34,9 +34,6 @@
 ;; org-mode
 (setq org-use-extra-keys t)
 
-(use-package nix-mode
-  :hook (before-save . nix-format-before-save))
-
 ;;; Inits
 ;; Code:
 ;; Heaviliy inspired by https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org
@@ -1349,6 +1346,14 @@ https://cundy.me/post/elfeed/"
 
 ;;;; CMake
 (use-package cmake-mode)
+
+;;;; nix-mode
+(use-package nix-mode
+  :hook (before-save . nix-format-before-save))
+
+;;;; envrc
+(use-package envrc
+  :hook (after-init . envrc-global-mode))
 
 ;;; Navigation
 ;; (use-package avy

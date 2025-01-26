@@ -19,7 +19,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-7b24a3c6-50bb-4e02-af2a-08e3219829c4".device = "/dev/disk/by-uuid/7b24a3c6-50bb-4e02-af2a-08e3219829c4";
+  boot.initrd.luks.devices."luks-7b24a3c6-50bb-4e02-af2a-08e3219829c4".device =
+    "/dev/disk/by-uuid/7b24a3c6-50bb-4e02-af2a-08e3219829c4";
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -73,6 +74,8 @@
   programs.sway.enable = true;
   xdg.portal.wlr.enable = true;
 
+  programs.direnv.enable = true;
+
   environment.systemPackages = with pkgs; [
     # Dev
     vim
@@ -122,8 +125,6 @@
     # https://github.com/syt2/zotero-scipdf
     zotero_7
     qbittorrent
-
-    # TODO: nix-direnv + emacs envrc
   ];
 
   fonts.packages = with pkgs; [
