@@ -1195,14 +1195,13 @@ https://cundy.me/post/elfeed/"
 	  '(:annotation-function (lambda (completion)
 				   (format "\t%s" (cdr (assoc completion minibuffer-completion-table))))))
 	 (key (completing-read "Select compile-command" jf/project-compile-commands))
-	 (cmd (cdr (assoc key project-compile-commands))))
+	 (cmd (cdr (assoc key jf/project-compile-commands))))
     ;; stole from `project-compile`
     (let ((default-directory (project-root (project-current t)))
           (compilation-buffer-name-function
            (or project-compilation-buffer-name-function
-	       compilation-buffer-name-function))
-	  (compilation-read-command nil))
-      (call-interactively #'compile (vector cmd)))))
+	       compilation-buffer-name-function)))
+      (compile cmd))))
 
 (use-package project
   :ensure nil
