@@ -1132,7 +1132,6 @@ https://cundy.me/post/elfeed/"
   :bind (:map eglot-mode-map ("C-M-." . #'eldoc-box-help-at-point)))
 
 ;;;; compile
-
 (use-package compile
   :ensure nil
 
@@ -1155,6 +1154,60 @@ https://cundy.me/post/elfeed/"
 
   :hook (compilation-filter . ansi-color-compilation-filter)
   :bind ("C-c g" . #'recompile))
+
+;;;; jf/project
+(defun jf/get-project-relative-path-line ()
+  (interactive)
+  (if-let ((proj (project-current)))
+      (let* ((path (file-relative-name (buffer-file-name) (project-root proj)))
+	     (num (number-to-string (line-number-at-pos)))
+	     (pn (concat path ":" num)))
+	(kill-new pn)
+	(message pn))
+    (message "Not in a project.")))
+
+(defun jf/goto-project-file-line ()
+  "Meant to be used after 'jf/get-project-relative-path-line'."
+  (interactive)
+  (if-let ((pr (project-current)))
+      (let* ((kill (split-string (current-kill 0) ":"))
+	     (file (car kill))
+	     (line (string-to-number (cadr kill)))
+       	     (root (project-root pr))
+	     (abs (expand-file-name file root)))
+	(if (file-exists-p abs)
+	    (progn
+	      (find-file abs)
+	      (goto-line line)
+	      (message (format "Going to %s, line %s" file line)))
+	  (message "Last kill is not from jf/get-project-relative-path-line.")))
+    (message "Not in a project.")))
+
+(defvar jf/project-compile-commands nil
+  "alist of command names to command strings, to be executed by `compile`")
+
+(defun jf/project-compile ()
+  "Simple alist interface to compile a project, at the project-root."
+  (interactive)
+  (unless jf/project-compile-commands
+    (error "jf/project-compile-commands is nil"))
+  (let* ((completion-extra-properties
+	  '(:annotation-function (lambda (completion)
+				   (format "\t%s" (cdr (assoc completion minibuffer-completion-table))))))
+	 (key (completing-read "Select compile-command" jf/project-compile-commands))
+	 (cmd (cdr (assoc key project-compile-commands))))
+    ;; stole from `project-compile`
+    (let ((default-directory (project-root (project-current t)))
+          (compilation-buffer-name-function
+           (or project-compilation-buffer-name-function
+	       compilation-buffer-name-function))
+	  (compilation-read-command nil))
+      (call-interactively #'compile (vector cmd)))))
+
+(use-package project
+  :ensure nil
+  :bind (:map project-prefix-map
+	      (("c" . jf/project-compile))))
 
 ;;;; combobulate (treesitter)
 ;; `M-x combobulate' (or `C-c o o') to start using Combobulate
@@ -1661,34 +1714,6 @@ RAW-URI is from right-click on playlist > Share > Copy Link to Playlist.")
 (use-package emacs
   :ensure nil
   :bind (("C-c s" . #'jf/spotify-open-playlist)))
-
-;;;; project
-(defun jf/get-project-relative-path-line ()
-  (interactive)
-  (if-let ((proj (project-current)))
-      (let* ((path (file-relative-name (buffer-file-name) (project-root proj)))
-	     (num (number-to-string (line-number-at-pos)))
-	     (pn (concat path ":" num)))
-	(kill-new pn)
-	(message pn))
-    (message "Not in a project.")))
-
-(defun jf/goto-project-file-line ()
-  "Meant to be used after 'jf/get-project-relative-path-line'."
-  (interactive)
-  (if-let ((pr (project-current)))
-      (let* ((kill (split-string (current-kill 0) ":"))
-	     (file (car kill))
-	     (line (string-to-number (cadr kill)))
-       	     (root (project-root pr))
-	     (abs (expand-file-name file root)))
-	(if (file-exists-p abs)
-	    (progn
-	      (find-file abs)
-	      (goto-line line)
-	      (message (format "Going to %s, line %s" file line)))
-	  (message "Last kill is not from jf/get-project-relative-path-line.")))
-    (message "Not in a project.")))
 
 ;;;; dumb dmenu
 (defun jf/dumb-dmenu ()
