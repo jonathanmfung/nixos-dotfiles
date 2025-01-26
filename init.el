@@ -1809,6 +1809,17 @@ https://github.com/emacsmirror/dmenu/blob/e8cc9b27c79d3ecc252267c082ab8e9c82eab2
   (interactive)
   (let ((enable-local-variables :all))
     (hack-dir-local-variables-non-file-buffer)))
+
+;;;; safe-local-variable-values
+(setq safe-local-variable-values '((jf/project-compile-commands .
+								(("build-debug" . "cmake --preset debug && cmake --build --preset debug")
+								 ("run-debug" . "cmake --preset debug && cmake --build --preset debug && ./build/debug/leyval")
+								 ("test-debug" . "cmake --preset debug && cmake --build --preset debug && ctest --preset test-all")
+								 ("build-release" . "cmake --preset release && cmake --build --preset release")
+								 ("run-release" . "cmake --preset release && cmake --build --preset release && ./build/release/leyval")
+								 ))))
+
+
 ;;; Finish
 (setq gc-cons-percentage default-gc-percentage
       gc-cons-threshold default-gc-threshold)
