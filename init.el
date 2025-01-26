@@ -1556,9 +1556,9 @@ https://cundy.me/post/elfeed/"
     (if (empv--running?)
 	(empv-toggle)
       (progn (empv-play empv-audio-dir)
-	     (sit-for 0.01)
+	     (sit-for 0.05)
 	     (empv-playlist-shuffle)
-	     (sit-for 0.01)
+	     (sit-for 0.05)
 	     (empv-playlist-next))))
   :bind
   (:map empv-map
