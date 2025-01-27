@@ -91,6 +91,7 @@
     clang-tools
     nixfmt-rfc-style
     poetry
+    gdb
 
     # Utils - CLI
     ffmpeg-full
