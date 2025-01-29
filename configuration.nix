@@ -49,6 +49,29 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  # AMD GPU
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  # OpenCL https://wiki.nixos.org/wiki/AMD_GPU#OpenCL
+  hardware.graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd ];
+  # HIP https://wiki.nixos.org/wiki/AMD_GPU#HIP
+  systemd.tmpfiles.rules =
+    let
+      rocmEnv = pkgs.symlinkJoin {
+        name = "rocm-combined";
+        paths = with pkgs.rocmPackages; [
+          rocblas
+          hipblas
+          clr
+        ];
+      };
+    in
+    [
+      "L+    /opt/rocm   -    -    -     -    ${rocmEnv}"
+    ];
+
   ###############################################################
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
