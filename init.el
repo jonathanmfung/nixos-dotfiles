@@ -393,7 +393,13 @@ Discovered window-parameter from https://oremacs.com/2015/03/12/ace-window-displ
        `(magit-diff-context-highlight ((,c :background ,bg-cyan-nuanced)))
 
        `(window-divider ((,c :background ,bg-main :foreground ,border)))
-       `(fringe ((,c :background ,fringe :foreground ,fg-main))))
+       `(fringe ((,c :background ,fringe :foreground ,fg-main)))
+       `(denote-faces-year ((,c :foreground ,accent-0)))
+       `(denote-faces-month ((,c :foreground ,accent-1)))
+       `(denote-faces-day ((,c :foreground ,accent-2)))
+       `(denote-faces-hour ((,c :foreground ,fg-dim)))
+       `(denote-faces-minute ((,c :foreground ,fg-dim)))
+       `(denote-faces-second ((,c :foreground ,fg-dim))))
 
       `(setq hl-todo-keyword-faces
 	     '(("TODO" . ,red-intense)
@@ -758,24 +764,28 @@ Restore the buffer with \\<dired-mode-map>`\\[revert-buffer]'."
   (dired-do-kill-lines))
 
 (use-package denote
+  :init
+  (denote-rename-buffer-mode 1)
   :config
   (setq denote-file-type 'org 		; same as default
 	denote-directory (substitute-in-file-name "$HOME/denote-notes")
 	denote-dired-directories (list denote-directory)
-	denote-prompts '(title template keywords)
-	)
+	denote-prompts '(title keywords))
   (setq denote-templates '((reference . "TEXT\n\n\n* Resources\n - LINK")
 			   (journal . "Today ")
 			   (thoughts . "I ")))
 
   (setq xref-search-program 'ripgrep)	; denote-link-backlinks uses xref
-
   (setq denote-excluded-directories-regexp "docs\\|journal\\|scripts\\|bibliography\\|ltximg")
+
+  (setq denote-rename-buffer-format "[Δ] %t%b")
+  (setq denote-rename-buffer-backlinks-indicator " (←)")
 
   :bind (("C-c n l" . #'denote-link-or-create) ; safe link insertion
 	 ("C-c n f" . #'denote-open-or-create) ; safe note creation
 	 ("C-c n b" . #'denote-backlinks)
-	 ("C-c n s" . #'denote-find-link) ; open links in buffer
+	 ("C-c n s" . #'denote-find-link)     ; completing-read on links in buffer
+	 ("C-c n S" . #'denote-find-backlink) ; completing-read on backlinks to buffer
 	 ("C-c n r" . #'prot-dired-limit-regexp)
 	 ("C-c n c" . #'denote-rename-file-using-front-matter) ; update file name when modifying front-matter
 	 ("C-c n d" . (lambda () (interactive) (progn (dired denote-directory) (dired-hide-details-mode))))
@@ -783,124 +793,17 @@ Restore the buffer with \\<dired-mode-map>`\\[revert-buffer]'."
   :hook
   (dired-mode . denote-dired-mode-in-directories))
 
-;; (use-package denote-org-dblock
-;;   :after denote
-;;   :ensure nil
-;;   ;; TODO 231211 figure out how to not hard code this (locate-library "denote")
-;;   :load-path "~/.config/emacs-configs/emacs.d-my-vanilla/elpa/denote-2.0.0")
-
 (use-package denote-journal-extras
   :after denote
   :ensure nil
   :config
   (setq denote-journal-extras-title-format "%y%m%d"))
 
-(defun jf/export-denote-directory ()
-  "Rudimentary export from org to html.
-org-export properly converts denote links."
-  (let ((default-directory denote-directory)
-	(files (--filter (string= (file-name-extension it) "org")
-			 (directory-files denote-directory))))
-    (dolist (file files)
-      (with-current-buffer
-	  (find-file-noselect file)
-	(org-html-export-to-html)))))
-;; backlinks buffers autogenerates relative filenames of backlinks
-;; need to process these filenames into correct links
-;; then org-export can properly handle these links
-;;
-;; TODO Need a way to create an index.html, and possible backlinks.
-;; For backlinks, could inspect button property of buffer, then concat to end of original note.
-;; create link with proper format:
-(defun jf/denote-file-to-link (file)
-  (let* ((formatter (denote-link--file-type-format file nil)))
-  (denote-link--format-link file formatter)))
-
-;; (jf/denote-file-to-link "20221001T180256--denote-scripting__emacs.org")
-;; do this over each line of backlinks buffer
-
-
-;; ;; or can override backlink creation: modified from denote-link-backlinks
-;; ;; mapping over directory, we know file name
-;; (let ((file "20221001T180256--denote-scripting__emacs.org"))
-;;   (when (denote-file-is-writable-and-supported-p file)
-;;     (let* ((id (denote-retrieve-filename-identifier file))
-;;            (file-type (denote-filetype-heuristics file))
-;;            (title (denote-retrieve-title-value file file-type)))
-;;       ;; denote--retrieve-process-grep pulls all backlinks
-;;       (if-let ((files (denote--retrieve-process-grep id)))
-;; 	;; only need to override one line
-;;         ;; (denote-link--prepare-backlinks id files title)
-;; 	  (mapcar 'jf/denote-file-to-link files)
-;;         ;; need to insert "No Backlinks" in this case
-;;         (user-error "No links to the current note")))))
-;; returns list of links as strings
-;; one of the return elements is self
-;; because denote--retrive-process-grep deletes (buffer-file-name) from xref'd list
-;; so maybe just use full path
-
-;; (defun jf/denote-get-backlinks-as-links (file)
-;;   (when (denote-file-is-writable-and-supported-p file)
-;;     (let ((id (denote-retrieve-filename-identifier file)))
-;;       ;; denote--retrieve-process-grep pulls all backlinks
-;;       (if-let ((backlink-files
-;; 		(seq-filter
-;; 		 #'denote-file-is-note-p
-;; 		 (delete file (denote--retrieve-files-in-xrefs
-;; 			       (denote--retrieve-xrefs id))))))
-;; 	  (mapcar 'jf/denote-file-to-link backlink-files)
-;;         '("No backlinks to the current note")))))
-;; (jf/denote-get-backlinks-as-links "/home/jonat/denote-notes/20221001T013008--test__emacs.org")
-;; (jf/denote-get-backlinks-as-links "/home/jonat/denote-notes/20221001T022053--another__politics.org")
-;; (jf/denote-get-backlinks-as-links "/home/jonat/denote-notes/20221001T180256--denote-scripting__emacs.org")
-
-;; need to temp insert, then export
-
-;; (defun jf/export-denote-directory-backlinks ()
-;;   (let
-;;       ((default-directory denote-directory)
-;;        (files (--filter (string= (file-name-extension it) "org")
-;; 			(directory-files denote-directory t))))
-;;     (dolist (file files)
-;;       (let ((backlinks (jf/denote-get-backlinks-as-links file)))
-;; 	(with-current-buffer
-;; 	    (find-file-noselect file)
-
-;; 	  (save-excursion
-;; 	    (goto-char (point-max))
-;; 	    (insert "\n\n* Backlinks\n")
-;; 	    (insert (mapconcat (lambda (x) (format "- %s \n" x)) backlinks))
-;; 	    (org-html-export-to-html)
-;; 	    (revert-buffer nil t)))))))
-
-;; > mv ~/denote-notes/*.html ~/denote-notes/html
-
-;; ;; could even modify denote-link--prepare-backlinks
-;; ;; in the lines:
-;;       ;; (mapc (lambda (f)
-;;       ;;         (insert (denote-get-file-name-relative-to-denote-directory f))
-;;       ;;         (make-button (line-beginning-position) (line-end-position) :type 'denote-link-backlink-button)
-;;       ;;         (newline))
-;;       ;;       files)
-;; ; need to handle relative links, from source to denote-directory
-;; ;; denote-get-file-name-relative-to-denote-directory handles from backlink to denote-directory
-;; can't use denote-link--prepare-backlinks, since it takes in some id, and the id's generated backlink files
-;; generation is done in denote-link-backlinks
-
-;; ;; actually, denote-link-button-action is defined as #'find-file-other-window
-;; ;; since default-directory of backlinks buffer is denote-directory
-
-;; ;; Use something like this to temporarily insert backlinks, then export, then revert to never write file
-;; (save-excursion
-;;  (goto-char (point-max))
-;;  (insert "\n\nhello this is a test")
-;;  (org-html-export-to-html)
-;;  (revert-buffer nil t))
-
 ;;; citar
 (use-package citar
   :config
   (setq citar-notes-paths (list denote-directory))
+  (add-to-list 'citar-file-open-functions '("pdf" . citar-file-open-external))
   :custom
   (citar-bibliography '("~/denote-notes/bibliography/my_library.bib"))
   :hook
