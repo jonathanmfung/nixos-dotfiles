@@ -82,6 +82,7 @@
       "networkmanager"
       "wheel"
       "video"
+      "docker"
     ];
     packages = with pkgs; [ ];
   };
@@ -98,6 +99,7 @@
   xdg.portal.wlr.enable = true;
 
   programs.direnv.enable = true;
+  virtualisation.docker.enable = true;
 
   environment.systemPackages = with pkgs; [
     # Dev
