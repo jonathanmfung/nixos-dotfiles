@@ -1294,6 +1294,9 @@ https://cundy.me/post/elfeed/"
   :init
   (setq clang-format-style "Mozilla"))
 
+;;;; Swift
+(use-package swift-mode)
+
 ;;;; gdb
 (use-package emacs
   :ensure nil
