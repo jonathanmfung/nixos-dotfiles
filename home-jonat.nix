@@ -27,7 +27,7 @@ rec {
       rm = "rm -i";
       # https://stackoverflow.com/a/28353785
       up = ''uptime | awk -F'( |,|:)+' '{d=h=m=0; if ($7=="min") m=$6; else {if ($7~/^day/) {d=$6;h=$8;m=$9} else {h=$6;m=$7}}} {print d+0,"days,",h+0,"hours,",m+0,"minutes."}' '';
-      ec = "emacsclient -c .";
+      ec = "emacsclient -nw";
       nix-repl = "nix repl --expr 'import <nixpkgs>{}'";
       nrs = "sudo nixos-rebuild switch -I nixos-config=${home.homeDirectory}/nixos-dotfiles/configuration.nix";
     };
@@ -118,7 +118,8 @@ rec {
         XF86MonBrightnessUp = "exec ${pkgs.brightnessctl}/bin/brightnessctl s 1%+";
 
         "${modifier}+Shift+r" = "reload";
-        "${modifier}+Shift+e" = "exec ${pkgs.sway}/bin/swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
+        "${modifier}+Shift+e" =
+          "exec ${pkgs.sway}/bin/swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
 
         "${modifier}+${left}" = "focus left";
         "${modifier}+${down}" = "focus down";
