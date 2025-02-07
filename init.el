@@ -1295,7 +1295,9 @@ https://cundy.me/post/elfeed/"
   (setq clang-format-style "Mozilla"))
 
 ;;;; Swift
-(use-package swift-mode)
+(use-package swift-mode
+  :config
+  (add-to-list 'eglot-server-programs '(swift-mode . ("sourcekit-lsp"))))
 
 ;;;; gdb
 (use-package emacs
