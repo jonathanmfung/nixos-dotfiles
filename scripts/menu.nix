@@ -31,7 +31,7 @@
     	LinkedIn)
     	    wl-copy "https://www.linkedin.com/in/jonathanmfung";;
     	Personal)
-    	    wl-copy "https://jonathanmfung.github.io";;
+    	    wl-copy "https://jonathanmfung.com/";;
     	*)
     	    echo "Invalid option $opt";;
         esac
