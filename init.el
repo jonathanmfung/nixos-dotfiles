@@ -9,6 +9,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
+(xterm-mouse-mode 1)
 ;;; Fonts
 ;; 5/30/22: https://www.reddit.com/r/emacs/comments/pc189c/fonts_in_emacs_daemon_mode/
 ;; 6/1/22: This setup correctly sets fonts on system boot
@@ -1740,7 +1741,10 @@ https://github.com/emacsmirror/dmenu/blob/e8cc9b27c79d3ecc252267c082ab8e9c82eab2
 								 ("test-debug" . "cmake --preset debug && cmake --build --preset debug && ctest --preset test-all")
 								 ("build-release" . "cmake --preset release && cmake --build --preset release")
 								 ("run-release" . "cmake --preset release && cmake --build --preset release && ./build/release/leyval")
-								 ))))
+								 ))
+				   (jf/project-compile-commands .
+				 (("build serve" . "npx quartz build --serve")
+				  ("version" . "npx quartz --version")))))
 
 
 ;;; Finish
