@@ -738,6 +738,20 @@ Discovered window-parameter from https://oremacs.com/2015/03/12/ace-window-displ
                            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                            ("\\paragraph{%s}" . "\\paragraph*{%s}")
                            ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+
+;;; edit-indirect
+(use-package edit-indirect)
+
+;;; Markdown-mode
+(use-package markdown-mode
+  :config
+  (setq markdown-unordered-list-item-prefix "  - ")
+  (markdown-toggle-fontify-code-blocks-natively 1)
+  :bind (:map markdown-mode-map
+	      ("M-p" . nil)
+	      ("M-n" . nil))
+  :hook (markdown-mode . mixed-pitch-mode))
+
 ;;; Denote
 (defvar prot-dired--limit-hist '()
   "Minibuffer history for `prot-dired-limit-regexp'.")
@@ -1536,6 +1550,7 @@ https://cundy.me/post/elfeed/"
 
 ;;;; Mixed-pitch
 (use-package mixed-pitch
+  :config (add-to-list 'mixed-pitch-fixed-pitch-faces 'markdown-table-face)
   :bind ("<f2>" . mixed-pitch-mode))
 
 ;;;; Olivetti
