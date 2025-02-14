@@ -167,11 +167,11 @@ https://github.com/minad/vertico/issues/65#issuecomment-875094896"
 ;; https://github.com/minad/vertico#configuration
 (use-package orderless
   :init
-  (setq completion-styles '(orderless)
+  (setq completion-styles '(orderless basic)
         completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion)))
-	)
-  (setq orderless-matching-styles '(orderless-regexp)))
+        completion-category-overrides '((file (styles partial-completion))))
+  (setq orderless-matching-styles '(orderless-regexp))
+  (setq read-file-name-completion-ignore-case t))
 
 ;;;; Embark
 (use-package embark
