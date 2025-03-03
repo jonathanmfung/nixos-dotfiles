@@ -1227,6 +1227,12 @@ https://cundy.me/post/elfeed/"
 	      ;; used to override beginning-of-visual-line
 	      ("C-a" . #'haskell-interactive-mode-bol)))
 
+;;;; OCaml
+(use-package tuareg)
+
+;;;; ocamlformat
+(use-package ocamlformat)
+
 ;;;; VTerm
 (use-package vterm)
 
