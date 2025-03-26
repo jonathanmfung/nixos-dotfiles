@@ -263,6 +263,7 @@ https://github.com/minad/vertico/issues/65#issuecomment-875094896"
 
   :init
   (global-corfu-mode)
+  (completion-preview-mode 1)
   (defun corfu-enable-always-in-minibuffer ()
     "Enable Corfu in the minibuffer if Vertico/Mct are not active."
     (unless (or (bound-and-true-p mct--active)
