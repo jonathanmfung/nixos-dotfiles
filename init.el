@@ -607,7 +607,6 @@ Discovered window-parameter from https://oremacs.com/2015/03/12/ace-window-displ
    ;; 				       (prin1-to-string (substring
    ;; 							 (shell-command-to-string "date -dlast-monday +[%Y-%m-%d]") 0 -1))))))
    :map org-mode-map
-   ("$" . #'math-delimiters-insert)
    ("C-c C-x d" . #'org-metadown)
    ;; org-agenda-mode-map is not loading on startup for some reason
    ;; :map org-agenda-mode-map
@@ -1693,10 +1692,6 @@ https://github.com/emacsmirror/dmenu/blob/e8cc9b27c79d3ecc252267c082ab8e9c82eab2
 ;;   :ensure nil
 ;;   :hook
 ;;   (org-mode . org-bars-mode))
-
-;; https://github.com/oantolin/math-delimiters
-;; (use-package math-delimiters
-;;   :ensure nil)
 
 (use-package org-modern-indent
   :ensure nil
