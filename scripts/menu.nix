@@ -26,12 +26,14 @@
     }
 
     link_menu () {
-        opt=$(gum choose --no-show-help LinkedIn Personal --header="Link:")
+        opt=$(gum choose --no-show-help LinkedIn Personal GitHub --header="Link:")
         case $opt in
     	LinkedIn)
     	    wl-copy "https://www.linkedin.com/in/jonathanmfung";;
     	Personal)
-    	    wl-copy "https://jonathanmfung.com/";;
+    	    wl-copy "https://jonathanmfung.com";;
+      GitHub)
+          wl-copy "https://github.com/jonathanmfung";;
     	*)
     	    echo "Invalid option $opt";;
         esac
