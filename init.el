@@ -1287,6 +1287,11 @@ https://cundy.me/post/elfeed/"
   :hook
   (gleam-ts-mode . eglot-ensure))
 
+;;;; PHP
+(use-package php-mode
+  :config
+  (setq php-format-command 'php-cs-fixer))
+
 ;;;; SQL
 (use-package sqlformat
   ;; https://archlinux.org/packages/community/any/pgformatter/
