@@ -197,6 +197,28 @@ rec {
     '';
   };
 
+  programs.swaylock.enable = true;
+  programs.swaylock.settings = {
+    # daemonize = true casues script/menu invocation to red screen of death.
+    # probably because the terminal instantly dies or something.
+    line-uses-inside = true;
+    color = "404040";
+    bs-hl-color = "000000";
+    key-hl-color = "ffffff";
+    line-color = "000000";
+    line-clear-color = "ffffff";
+    ring-color = "000000";
+    inside-color = "000000";
+    separator-color = "ffffff";
+    inside-clear-color = "ffffff";
+    ring-clear-color = "000000";
+    ring-wrong-color = "ff7c00";
+    inside-wrong-color = "ffffff";
+    ring-ver-color = "00BFE0";
+    inside-ver-color = "ffffff";
+    font = "Iosevka SS14";
+  };
+
   programs.waybar = {
     enable = true;
     settings.mainBar = {

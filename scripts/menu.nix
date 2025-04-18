@@ -10,8 +10,10 @@
   ];
   text = ''
     power_menu () {
-        opt=$(gum choose --no-show-help Sleep Suspend Hibernate Shutdown --header="Power:")
+        opt=$(gum choose --no-show-help Lock Sleep Suspend Hibernate Shutdown --header="Power:")
         case $opt in
+      Lock)
+          swaylock;;
     	Sleep)
     	    systemctl sleep;;
     	Suspend)
