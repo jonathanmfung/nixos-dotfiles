@@ -173,6 +173,7 @@ https://github.com/minad/vertico/issues/65#issuecomment-875094896"
         completion-category-overrides '((file (styles partial-completion))))
   (setq orderless-matching-styles '(orderless-regexp))
   (setq read-file-name-completion-ignore-case t))
+;; NOTE: Use "&" prefix to search annotations https://github.com/oantolin/orderless/pull/162#issuecomment-1978977210
 
 ;;;; Embark
 (use-package embark
