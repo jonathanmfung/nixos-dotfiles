@@ -1010,6 +1010,10 @@ https://cundy.me/post/elfeed/"
 	      ("M-S-n" . #'scroll-down-line)
 	      ("M-S-p" . #'scroll-up-line)))
 
+;;;; envrc
+(use-package envrc
+  :hook (after-init . envrc-global-mode))
+
 ;;;; magit + forge
 (use-package magit
   :bind
@@ -1230,6 +1234,12 @@ https://cundy.me/post/elfeed/"
 
 ;;;; OCaml
 (use-package tuareg)
+(use-package utop
+  :config
+  (setq utop-command "opam exec -- dune utop . -- -emacs")
+  ;; https://github.com/ocaml-community/utop/issues/280#issuecomment-2947991353
+  (inheritenv-add-advice 'utop)
+  :hook (tuareg-mode . utop-minor-mode))
 
 ;;;; ocamlformat
 (use-package ocamlformat)
@@ -1337,10 +1347,6 @@ https://cundy.me/post/elfeed/"
 ;;;; nix-mode
 (use-package nix-mode
   :hook (before-save . nix-format-before-save))
-
-;;;; envrc
-(use-package envrc
-  :hook (after-init . envrc-global-mode))
 
 ;;; Navigation
 ;; (use-package avy
