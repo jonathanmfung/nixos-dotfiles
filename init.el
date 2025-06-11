@@ -821,7 +821,14 @@ Restore the buffer with \\<dired-mode-map>`\\[revert-buffer]'."
   (setq citar-notes-paths (list denote-directory))
   (add-to-list 'citar-file-open-functions '("pdf" . citar-file-open-external))
   :custom
-  (citar-bibliography '("~/denote-notes/bibliography/my_library.bib"))
+  (citar-bibliography '("~/quartz/My Library.bib"))
+  (org-cite-global-bibliography '("~/quartz/My Library.bib"))
+  (org-cite-insert-processor 'citar)
+  (org-cite-follow-processor 'citar)
+  (org-cite-activate-processor 'citar)
+  (citar-bibliography org-cite-global-bibliography)
+
+  (org-cite-csl-styles-dir "~/Zotero/styles") ; /tmp/acm.csl
   :hook
   (LaTeX-mode . citar-capf-setup)
   (org-mode . citar-capf-setup))
