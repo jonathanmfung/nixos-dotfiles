@@ -752,7 +752,12 @@ Discovered window-parameter from https://oremacs.com/2015/03/12/ace-window-displ
   :bind (:map markdown-mode-map
 	      ("M-p" . nil)
 	      ("M-n" . nil))
-  :hook (markdown-mode . mixed-pitch-mode))
+  :hook (markdown-mode . mixed-pitch-mode)
+        (markdown-mode . visual-wrap-prefix-mode)
+	;; https://github.com/jrblevin/markdown-mode/issues/799
+	;; https://github.com/jrblevin/markdown-mode/issues/691
+	;; https://github.com/jrblevin/markdown-mode/pull/842
+	(markdown-mode . jit-lock-debug-mode))
 
 ;;; Denote
 (defvar prot-dired--limit-hist '()
