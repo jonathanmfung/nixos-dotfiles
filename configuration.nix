@@ -131,6 +131,7 @@
     gum
     killall
     file
+    fzf
 
     # Utils - GUI
     imv
