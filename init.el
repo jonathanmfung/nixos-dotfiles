@@ -1686,6 +1686,26 @@ https://github.com/emacsmirror/dmenu/blob/e8cc9b27c79d3ecc252267c082ab8e9c82eab2
 	 (executable-path (cdr (assoc (completing-read "Execute: " executable-files) files-alist))))
     (async-shell-command executable-path)))
 
+;;;; Custom simple-align
+(defvar-local jf/simple-align-desired-column 80)
+
+(defun jf/simple-align-space (&optional allow-reduce)
+  (interactive "P")
+  (let* ((col (current-column))
+	 (delta (- jf/simple-align-desired-column col))
+	 (insert-space (lambda () (insert-char 32 delta))))
+    (if (<= delta 0)
+	(if allow-reduce
+	    (progn
+	      (delete-all-space)
+	      (jf/simple-align-space))
+	    (message "point (%i) is past or at desired-column (%i)" col jf/simple-align-desired-column))
+      (funcall insert-space))))
+
+(defun jf/simple-align-set ()
+  (interactive)
+  (setq-local jf/simple-align-desired-column (current-column)))
+
 ;;; zathura file selection
 
 ;; can copy selected file path? with (kill-new)
