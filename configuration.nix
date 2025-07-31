@@ -72,6 +72,25 @@
       "L+    /opt/rocm   -    -    -     -    ${rocmEnv}"
     ];
 
+  # 250612: https://bbs.archlinux.org/viewtopic.php?id=302499
+  # tested with reboots each time
+  # does not work with ls, works with cat
+  boot.kernelParams = [
+    "amdgpu.dcdebugmask=0x10" # disable Panel Self-Refresh
+  ];
+
+  # this is for runtime parameters of the Kernel, like sysctl (??? how is this different from kernelParams)
+  # does NOT work with ls or cat
+  # boot.kernel.sysctl = {
+  #   "amdgpu.dcdebugmask" = "0x10";
+  # };
+
+  # does not work with ls, works with cat
+  # modprobe is for both built-in and loadable Kernel Modules
+  # boot.extraModprobeConfig = ''
+  #   options amdgpu dcdebugmask=0x10
+  # '';
+
   ###############################################################
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
