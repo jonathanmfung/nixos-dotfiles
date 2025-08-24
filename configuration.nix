@@ -171,6 +171,7 @@
     # https://github.com/syt2/zotero-scipdf
     zotero_7
     qbittorrent
+    anki-bin
   ];
 
   fonts.packages = with pkgs; [
