@@ -58,19 +58,19 @@ rec {
           bg = "#a5b2bf solid_color";
         };
         # Framework Laptop Screen
-        "eDP-1" = {
+        "BOE 0x0BCA Unknown" = {
           resolution = "2256x1504";
           position = "0,1556";
           scale = "1.5";
         };
         # Philips 4k
-        "DP-9" = {
+        "Philips Consumer Electronics Company PHL 328E1 0x00001626" = {
           resolution = "3840x2160";
           position = "0,476";
           scale = "2.0";
         };
         # Vertical LG
-        "DP-10" = {
+        "LG Electronics 27MP35 0x000B191A" = {
           resolution = "1920x1080";
           position = "1920,0";
           scale = "1.0";
