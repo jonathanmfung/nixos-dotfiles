@@ -1,6 +1,7 @@
 {
   gum,
   wl-clipboard,
+  screenshotImpl,
 }:
 {
   name = "menu";
@@ -42,12 +43,14 @@
     }
 
     main_menu (){
-        opt=$(gum choose --no-show-help Power Link --header="Menu:")
+        opt=$(gum choose --no-show-help Power Link Screenshot --header="Menu:")
         case $opt in
     	Link)
     	    link_menu;;
     	Power)
     	    power_menu;;
+    	Screenshot)
+    	    ${screenshotImpl}/bin/screenshot;;
     	*)
     	    echo "Invalid option $opt";;
         esac

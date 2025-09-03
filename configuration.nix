@@ -221,8 +221,40 @@
           import ./scripts/menu.nix {
             inherit (final) gum;
             inherit (final) wl-clipboard;
+            screenshotImpl = my_screenshot;
           }
         )
+      );
+      # TODO: convert to callPackage?
+      my_screenshot = (
+        final.stdenv.mkDerivation {
+          pname = "my_screenshot";
+          version = "1.0.0";
+          src = ./scripts/screenshot;
+          nativeBuildInputs = [
+            pkgs.ghc
+            pkgs.makeWrapper
+          ];
+          buildPhase = ''
+            runHook preBuild
+            ghc main.hs -O2 -o screenshot
+            runHook postBuild
+          '';
+          installPhase = ''
+            runHook preInstall
+            mkdir -p $out/bin
+            cp screenshot $out/bin
+            wrapProgram $out/bin/screenshot \
+              --prefix PATH : ${
+                pkgs.lib.makeBinPath [
+                  pkgs.slurp
+                  pkgs.grim
+                  pkgs.libnotify
+                ]
+              }
+            runHook postInstall
+          '';
+        }
       );
     })
   ];
