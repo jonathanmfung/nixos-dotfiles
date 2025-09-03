@@ -215,8 +215,8 @@
     ))
 
     # Custom Scripts
-    (final: prev: {
-      menu = (
+    (final: prev: rec {
+      my_menu = (
         final.writeShellApplication (
           import ./scripts/menu.nix {
             inherit (final) gum;

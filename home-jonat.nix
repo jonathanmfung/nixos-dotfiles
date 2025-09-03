@@ -100,7 +100,8 @@ rec {
         "${modifier}+Shift+q" = "kill";
 
         "${modifier}+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
-        "${modifier}+Shift+d" = "exec foot -a 'floating' -W 30x10 -e ${pkgs.menu}/bin/menu";
+        # TODO Handle failures of menu, so term doesn't dissapear and error still shows
+        "${modifier}+Shift+d" = "exec foot -a 'floating' -W 30x10 -e ${pkgs.my_menu}/bin/menu";
 
         XF86AudioMute = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
         XF86AudioLowerVolume = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -2%";
