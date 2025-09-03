@@ -128,6 +128,7 @@
     # Langs
     sbcl
     python3
+    ghc
 
     # Tooling
     gnumake
