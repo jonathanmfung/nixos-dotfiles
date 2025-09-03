@@ -1051,8 +1051,7 @@ https://cundy.me/post/elfeed/"
   (setq eglot-send-changes-idle-time 0.20))
 
 ;;;; dape
-(use-package dape
-  :ensure nil)
+(use-package dape)
 
 ;;;; flymake
 (use-package flymake
