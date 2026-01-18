@@ -274,7 +274,7 @@ rec {
       backlight.format = "D: {percent}%";
 
       "custom/spotify" = {
-        format = "{icon} {}";
+        format = "{icon} {text}";
         escape = true;
         max-length = 40;
         interval = 15;
