@@ -129,6 +129,10 @@
     sbcl
     python3
     ghc
+    ocaml
+    ocamlPackages.utop
+    ocamlPackages.ocaml-lsp
+    ocamlformat
 
     # Tooling
     gnumake
