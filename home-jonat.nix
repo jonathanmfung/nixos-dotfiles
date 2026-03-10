@@ -45,8 +45,10 @@ rec {
 
   programs.git = {
     enable = true;
-    userEmail = "jonathanfung2000@gmail.com";
-    userName = "Jonathan Fung";
+    settings.user = {
+      email = "jonathanfung2000@gmail.com";
+      name = "Jonathan Fung";
+    };
   };
 
   wayland.windowManager.sway = {
