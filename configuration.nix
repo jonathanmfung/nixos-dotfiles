@@ -319,6 +319,10 @@
     }
   );
 
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = false;
+  services.blueman.enable = true;
+
   # Enable auto-discovery of network printers
   # wiki.nixos.org/wiki/Printing
   services.avahi = {
