@@ -22,10 +22,9 @@
   (defvar jf/default-font-size 100)
   (defvar jf/default-variable-font-size 100)
   (when (display-graphic-p)
-    (set-face-attribute 'default nil :font "Iosevka Custom" :height jf/default-font-size)
-    (set-face-attribute 'fixed-pitch nil :font "Iosevka Custom" :height jf/default-font-size)
-    (set-face-attribute 'variable-pitch nil :font "Iosevka Etoile" :height jf/default-variable-font-size)
-    ))
+    (set-face-attribute 'default nil :font "Iosevka SS14" :height jf/default-font-size)
+    (set-face-attribute 'fixed-pitch nil :font "Iosevka SS14" :height jf/default-font-size)
+    (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height jf/default-variable-font-size)))
 
 ;; run this hook after we have initialized the first time
 (add-hook 'after-init-hook 'jf/setup-font-faces)

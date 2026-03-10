@@ -181,8 +181,7 @@
     noto-fonts-emoji
     (iosevka.override {
       privateBuildPlan = {
-        # TODO: Rename to Iosevka SS14?
-        family = "Iosevka Custom";
+        family = "Iosevka SS14";
         spacing = "normal";
         serifs = "sans";
         noCvSs = true;
@@ -198,6 +197,19 @@
         family = "Iosevka Etoile";
         spacing = "quasi-proportional";
         serifs = "slab";
+        noCvSs = true;
+        exportGlyphNames = false;
+        variants = {
+          inherits = "ss14";
+        };
+      };
+      set = "SS14";
+    })
+    (iosevka.override {
+      privateBuildPlan = {
+        family = "Iosevka Aile";
+        spacing = "quasi-proportional";
+        serifs = "sans";
         noCvSs = true;
         exportGlyphNames = false;
         variants = {

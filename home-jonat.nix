@@ -190,11 +190,11 @@ rec {
       };
       bars = [ { command = "${pkgs.waybar}/bin/waybar"; } ];
     };
-    # TODO: Use iosevka.privateBuildPlan.family
+    # TODO: Use iosevka.privateBuildPlan.family somehow
     extraConfig = ''
       default_border pixel 3
       title_align center
-      font "Iosevka Custom" 9
+      font "Iosevka SS14" 9
     '';
   };
 
@@ -336,7 +336,7 @@ rec {
     style = ''
       * {
           /* `otf-font-awesome` is required to be installed for icons */
-          font-family: Iosevka Custom, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+          font-family: Iosevka SS14, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
           font-size: 10px;
       }
 
@@ -634,7 +634,7 @@ rec {
   programs.foot.enable = true;
   programs.foot.settings = {
     main = {
-      font = "Iosevka Custom:size=14";
+      font = "Iosevka SS14:size=14";
     };
 
     colors = {
@@ -687,7 +687,7 @@ rec {
     enable = true;
     settings = {
       main = {
-        font = "Iosevka Custom:size=12";
+        font = "Iosevka SS14:size=12";
         terminal = "${pkgs.foot}/bin/foot -e";
         prompt = "'>>= '";
         anchor = "top";
