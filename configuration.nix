@@ -177,6 +177,7 @@
     zotero_7
     qbittorrent
     anki-bin
+    nautilus
   ];
 
   fonts.packages = with pkgs; [
