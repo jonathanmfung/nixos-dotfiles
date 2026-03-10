@@ -8,11 +8,21 @@
   ...
 }:
 
+let
+  my-home-manager-version = "25.11";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-${my-home-manager-version}.tar.gz";
+in
 {
+  assertions = [
+    {
+      assertion = config.system.nixos.release == my-home-manager-version;
+      message = "Home Manager (${my-home-manager-version}) and NixOS version (${config.system.nixos.release}) mismatch!";
+    }
+  ];
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    <home-manager/nixos>
+    (import "${home-manager}/nixos")
   ];
 
   # Bootloader.
@@ -110,6 +120,7 @@
     inherit config;
     inherit pkgs;
   };
+  home-manager.backupFileExtension = "backup";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
