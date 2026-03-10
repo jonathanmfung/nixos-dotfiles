@@ -232,6 +232,15 @@
       }
     ))
 
+    # https://discourse.nixos.org/t/setting-an-environment-variable-for-a-single-package/15075/6
+    (final: prev: {
+      anki-bin = prev.anki-bin.overrideAttrs (oldAttrs: {
+        postInstall = (oldAttrs.postInstall or "") + ''
+          wrapProgram $out/bin/anki-bin --set ANKI_WAYLAND 1
+        '';
+      });
+    })
+
     # Custom Scripts
     (final: prev: rec {
       my_menu = (
