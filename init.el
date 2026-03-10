@@ -357,9 +357,9 @@ Discovered window-parameter from https://oremacs.com/2015/03/12/ace-window-displ
              '((nano-modeline-buffer-status) " "
                (nano-modeline-buffer-name) " "
                (nano-modeline-git-info "") " "
+	       ((lambda (_) (when (derived-mode-p 'pdf-view-mode) (nano-modeline-pdf-page))) nil) " "
 	       (jf/nano-modeline-ace-display "{" "}"))
-             '((nano-modeline-date nil "%a %y%m%d -") " "
-               (nano-modeline-cursor-position)
+             '((nano-modeline-cursor-position)
 	       (nano-modeline-window-dedicated))
              default))
 
