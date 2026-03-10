@@ -189,6 +189,11 @@ in
     qbittorrent
     anki-bin
     nautilus
+    inkscape
+    libreoffice
+    hunspell
+    hunspellDicts.en_US
+    hyphenDicts.en_US
   ];
 
   fonts.packages = with pkgs; [
