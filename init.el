@@ -378,8 +378,17 @@ Discovered window-parameter from https://oremacs.com/2015/03/12/ace-window-displ
 	modus-themes-mode-line '()
 	modus-themes-subtle-line-numbers t
 	modus-themes-org-blocks 'tinted-background
-	modus-themes-headings '((1 . (rainbow overline background))
-				(t . (rainbow overline no-bold)))
+	modus-themes-headings '((1 . t)
+				(t . (regular)))
+	modus-themes-common-palette-overrides
+	'((fg-heading-1 magenta-warmer) (fg-heading-2 magenta-cooler) (fg-heading-3 magenta-warmer)
+	  (fg-heading-4 magenta-cooler) (fg-heading-5 magenta-warmer) (fg-heading-6 magenta-cooler)
+	  (fg-heading-7 magenta-warmer) (fg-heading-8 magenta-cooler)
+	  (bg-heading-1 bg-dim) (bg-heading-2 bg-dim) (bg-heading-3 bg-dim) (bg-heading-4 bg-dim)
+	  (bg-heading-5 bg-dim) (bg-heading-6 bg-dim) (bg-heading-7 bg-dim) (bg-heading-8 bg-dim)
+	  (overline-heading-1 border) (overline-heading-2 border) (overline-heading-3 border)
+	  (overline-heading-4 border) (overline-heading-5 border) (overline-heading-6 border)
+	  (overline-heading-7 border) (overline-heading-8 border))
 	modus-themes-completions '((matches . (intense))
 				   (selection . (accented intense))
 				   (popup . (accented))))
@@ -387,6 +396,8 @@ Discovered window-parameter from https://oremacs.com/2015/03/12/ace-window-displ
   (defun jf/modus-themes-custom-faces ()
     ;; [ status | name (primary) secondary ]
     ;; 230101: I believe these inherit from mode-line-active
+    ;; NOTE: I think this doesn't have to be a hook, Might be able to to just set
+    ;;       (background light) like `magit-hash`.
     (modus-themes-with-colors
       (custom-set-faces
        `(nano-modeline-active ((,c)))
@@ -422,6 +433,7 @@ Discovered window-parameter from https://oremacs.com/2015/03/12/ace-window-displ
   ;; https://protesilaos.com/modus-themes/#h:1487c631-f4fe-490d-8d58-d72ffa3bd474
   (add-hook 'modus-themes-after-load-theme-hook #'jf/modus-themes-custom-faces)
 
+  (setq modus-themes-to-toggle '(modus-operandi modus-vivendi-tinted))
   (modus-themes-load-theme 'modus-operandi)
 
   :bind
