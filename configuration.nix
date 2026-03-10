@@ -319,6 +319,29 @@
     }
   );
 
+  # Enable auto-discovery of network printers
+  # wiki.nixos.org/wiki/Printing
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+      gutenprint
+      gutenprintBin
+      hplip
+      hplipWithPlugin
+      brlaser
+      canon-cups-ufr2
+      carps-cups
+      cups-bjnp
+    ];
+  };
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
