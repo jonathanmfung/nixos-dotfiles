@@ -1246,9 +1246,7 @@ https://cundy.me/post/elfeed/"
 (use-package haskell-mode
   :init
   (add-hook 'haskell-mode-hook #'interactive-haskell-mode)
-  (add-hook 'haskell-mode-hook #'subword-mode)
-  :config
-  (setq haskell-process-type 'stack-ghci))
+  (add-hook 'haskell-mode-hook #'subword-mode))
 
 (use-package haskell-interactive-mode
   :ensure nil
@@ -1295,8 +1293,6 @@ https://cundy.me/post/elfeed/"
 
 ;;;; Python
 (use-package elpy
-  :init
-  (elpy-enable)
   :config
   (setq elpy-formatter 'black)
   (setq python-shell-interpreter "ipython")
