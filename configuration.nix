@@ -196,50 +196,68 @@ in
     hyphenDicts.en_US
   ];
 
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-color-emoji
-    (iosevka.override {
-      privateBuildPlan = {
-        family = "Iosevka SS14";
-        spacing = "normal";
-        serifs = "sans";
+  fonts.packages =
+    let
+      iosevkaCommonBuildPlan = {
         noCvSs = true;
         exportGlyphNames = false;
         variants = {
           inherits = "ss14";
         };
-      };
-      set = "SS14";
-    })
-    (iosevka.override {
-      privateBuildPlan = {
-        family = "Iosevka Etoile";
-        spacing = "quasi-proportional";
-        serifs = "slab";
-        noCvSs = true;
-        exportGlyphNames = false;
-        variants = {
-          inherits = "ss14";
+        weights.Regular = {
+          shape = 400;
+          menu = 400;
+          css = 400;
+        };
+        weights.Bold = {
+          shape = 700;
+          menu = 700;
+          css = 700;
+        };
+        slopes.Upright = {
+          angle = 0;
+          shape = "upright";
+          menu = "upright";
+          css = "normal";
+        };
+        slopes.Italic = {
+          angle = 9.4;
+          shape = "italic";
+          menu = "italic";
+          css = "italic";
         };
       };
-      set = "SS14";
-    })
-    (iosevka.override {
-      privateBuildPlan = {
-        family = "Iosevka Aile";
-        spacing = "quasi-proportional";
-        serifs = "sans";
-        noCvSs = true;
-        exportGlyphNames = false;
-        variants = {
-          inherits = "ss14";
+    in
+    with pkgs;
+    [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-color-emoji
+      (iosevka.override {
+        privateBuildPlan = iosevkaCommonBuildPlan // {
+          family = "Iosevka SS14";
+          spacing = "normal";
+          serifs = "sans";
         };
-      };
-      set = "SS14";
-    })
-  ];
+        set = "SS14";
+      })
+      (iosevka.override {
+        privateBuildPlan = iosevkaCommonBuildPlan // {
+          family = "Iosevka Etoile";
+          spacing = "quasi-proportional";
+          serifs = "slab";
+        };
+        set = "SS14";
+      })
+      (iosevka.override {
+        privateBuildPlan = iosevkaCommonBuildPlan // {
+          family = "Iosevka Aile";
+          spacing = "quasi-proportional";
+          serifs = "sans";
+        };
+        set = "SS14";
+      })
+    ];
 
   nixpkgs.overlays = [
     (import (
