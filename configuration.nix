@@ -194,6 +194,7 @@ in
     hunspell
     hunspellDicts.en_US
     hyphenDicts.en_US
+    freecad
   ];
 
   fonts.packages =
