@@ -131,6 +131,8 @@ in
   programs.direnv.enable = true;
   virtualisation.docker.enable = true;
 
+  programs.pulseview.enable = true;
+
   environment.systemPackages = with pkgs; [
     # Dev
     vim
