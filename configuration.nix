@@ -388,6 +388,15 @@ in
 
   services.udisks2.enable = true;
 
+  # udev
+  services.udev.packages = [
+    (pkgs.writeTextFile {
+      name = "probe-rs";
+      text = (builtins.readFile ./data/69-probe-rs.rules);
+      destination = "/etc/udev/rules.d/69-probe-rs.rules";
+    })
+  ];
+
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
