@@ -197,6 +197,10 @@ in
     hunspellDicts.en_US
     hyphenDicts.en_US
     freecad
+    # ocrmypdf uses tesseract for OCR and jbig2enc for encoding
+    ocrmypdf
+    tesseract
+    jbig2enc
   ];
 
   fonts.packages =
