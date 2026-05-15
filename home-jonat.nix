@@ -216,6 +216,7 @@ rec {
 
         # TODO: using ${pkgs.emacs}/bin/emacsclient launches in Xwayland
         "${modifier}+ctrl+Return" = "exec emacsclient -c";
+        "${modifier}+q" = "exec ${pkgs.dunst}/bin/dunstctl close";
       };
 
       ################################################
@@ -772,8 +773,12 @@ rec {
     };
   };
 
-  # TODO: Add dunst
   # TODO: Add zathura
+  services.dunst = {
+    enable = true;
+    configFile = ./data/dunstrc;
+  };
+
 
   services.gammastep = {
     enable = true;

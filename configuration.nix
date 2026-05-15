@@ -161,7 +161,6 @@ in
     ffmpeg-full
     ispell
     ripgrep
-    dunst
     brightnessctl
     playerctl
     gammastep
