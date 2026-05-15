@@ -1714,28 +1714,6 @@ https://github.com/emacsmirror/dmenu/blob/e8cc9b27c79d3ecc252267c082ab8e9c82eab2
   (interactive)
   (setq-local jf/simple-align-desired-column (current-column)))
 
-;;; zathura file selection
-
-;; can copy selected file path? with (kill-new)
-;; then paste back into a different zathura bind
-
-(defun jf/zathura-find-file (dir)
-  "In DIR, use in zathura pdf viewer to override default open file behavior."
-  (kill-new
-   (prog2
-       (select-frame (make-frame '((name . "floating")
-				   (minibuffer . only)
-				   (height . 10)
-				   (width . 60))))
-       (let ((vertico-count (- 10 1)))
-	 (shell-quote-argument 		; escape spaces
-	  (expand-file-name
-	   (read-file-name "File: " dir default-directory nil nil
-			   '(lambda (f) (let ((ext (url-file-extension f)))
-					  (or (string= ".pdf" ext)
-					      (file-directory-p ext))))))))
-     (delete-frame))))
-
 ;;;; Loading in any custom elisp
 (add-to-list 'load-path (expand-file-name "custom" user-emacs-directory))
 

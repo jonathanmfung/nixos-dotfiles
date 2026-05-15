@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 rec {
-
+  # TODO: Abstract out my color them (e.g. blue = #00BFE0)
   home.username = "jonat";
   home.homeDirectory = "/home/jonat";
 
@@ -773,12 +773,81 @@ rec {
     };
   };
 
-  # TODO: Add zathura
   services.dunst = {
     enable = true;
     configFile = ./data/dunstrc;
   };
 
+  programs.zathura = {
+    enable = true;
+    options = {
+      window-title-basename = "true";
+      window-title-home-tilde = "true";
+      statusbar-home-tilde = "true";
+      recolor = "false";
+      recolor-keephue = "true";
+      recolor-lightcolor = "#17191e"; # Background, modus vivendi
+      recolor-darkcolor = "#ffffff"; # Foreground
+      font = "Iosevka Aile 10";
+      default-fg = "#ffffff";
+      default-bg = "#707070";
+      statusbar-fg = "#00bee0";
+      statusbar-bg = "#ffffff";
+      # Text Cursor is controlled by (inverse of) inputbar-bg?
+      inputbar-fg = "#ffffff";
+      inputbar-bg = "#707070";
+      notification-fg = "#ffffff";
+      notification-bg = "#707070";
+      notification-error-fg = "#ffffff";
+      notification-error-bg = "#00bee0";
+      notification-warning-fg = "#ffffff";
+      notification-warning-bg = "#00bee0";
+      completion-highlight-fg = "#ffffff";
+      completion-highlight-bg = "#00bee0";
+      completion-fg = "#707070";
+      completion-bg = "#ffffff";
+      page-padding = "3";
+      first-page-column = "1:1";
+    };
+    mappings = {
+      # https://gist.github.com/ne9z/8778d614b90b85dfe8f6b698ad758f36
+      # For input bar:
+      # https://unix.stackexchange.com/questions/153190/zathura-how-do-i-add-a-keybind-for-exec
+      "[normal] Q" = "quit";
+      "[normal] <C-g>" = "abort";
+      "[normal] <C-i>" = "toggle_index";
+      "[index] <C-g>" = "toggle_index";
+      "[fullscreen] <C-g>" = "abort";
+      "[normal] <C-z>" = "file_chooser";
+      "[normal] <C-s>" = "toggle_statusbar";
+      "[normal] <C-b>" = "scroll left";
+      "[normal] <C-n>" = "scroll down";
+      "[normal] <C-p>" = "scroll up";
+      "[normal] <C-f>" = "scroll right";
+      "[index] <C-p>" = "navigate_index up";
+      "[index] <C-n>" = "navigate_index down";
+      "[index] <C-b>" = "navigate_index collapse";
+      "[index] <C-f>" = "navigate_index expand";
+      "[fullscreen] <C-b>" = "scroll left";
+      "[fullscreen] <C-n>" = "scroll down";
+      "[fullscreen] <C-p>" = "scroll up";
+      "[fullscreen] <C-f>" = "scroll right";
+      "[normal] <C-v>" = "scroll full-down";
+      "[normal] <A-v>" = "scroll full-up";
+      "[normal] <C-P>" = "scroll full-up";
+      "[normal] <C-N>" = "scroll full-down";
+      "[normal] <A-\<>" = "goto top";
+      "[normal] <A-\>>" = "goto bottom";
+      "[index] <A-\<>" = "navigate_index top";
+      "[index] <A-\>>" = "navigate_index bottom";
+      "[fullscreen] <A-\<>" = "goto top";
+      "[fullscreen] <A-\>>" = "goto bottom";
+    };
+    extraConfig = ''
+      unmap [normal] q
+      unmap [index] q
+    '';
+  };
 
   services.gammastep = {
     enable = true;
