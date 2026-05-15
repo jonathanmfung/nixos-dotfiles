@@ -348,10 +348,6 @@ in
         epkgs:
         epkgs
         // {
-          coalton-mode = pkgs.callPackage ./elisp/coalton-mode.nix {
-            inherit (pkgs) fetchFromGitHub;
-            inherit (epkgs) trivialBuild;
-          };
           consult-xref-stack = pkgs.callPackage ./elisp/consult-xref-stack.nix {
             inherit (pkgs) fetchFromGitHub;
             inherit (epkgs) trivialBuild;

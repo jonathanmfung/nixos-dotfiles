@@ -1240,8 +1240,6 @@ https://cundy.me/post/elfeed/"
 (use-package cider)
 ;;;; Guile + geiser
 (use-package geiser-guile)
-;;;; coalton-mode
-(use-package coalton-mode)
 ;;;; Haskell
 (use-package haskell-mode
   :init
