@@ -169,6 +169,7 @@ in
     killall
     file
     fzf
+    tree
 
     # Utils - GUI
     imv

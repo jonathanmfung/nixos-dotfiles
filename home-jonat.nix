@@ -4,7 +4,14 @@ rec {
   home.username = "jonat";
   home.homeDirectory = "/home/jonat";
 
-  home.packages = [ pkgs.htop ];
+  home.packages = [
+    pkgs.htop
+    # (pkgs.writeTextDir "share/dbus-1/services/org.freedesktop.FileManager1.service" ''
+    #   [D-BUS Service]
+    #   Name=org.freedesktop.FileManager1
+    #   Exec=${pkgs.emacs}/bin/emacsclient -c --eval '(dired "%f")'
+    # '')
+  ];
 
   home.pointerCursor = {
     name = "Adwaita";
@@ -14,6 +21,39 @@ rec {
       enable = true;
       defaultCursor = "Adwaita";
     };
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    associations.added = {
+      "application/x-directory" = "emacs-dired.desktop";
+      "inode/directory" = "emacs-dired.desktop";
+    };
+    associations.removed = {
+      "inode/directory" = "org.pwmt.zathura-cb.desktop";
+    };
+  };
+
+  xdg.desktopEntries = {
+    # NOTE: quoting from (nix -> .desktop -> emacs) is crazy, so just use this wrapper
+    emacs-dired =
+      let
+        emacsDiredWrapper = pkgs.writeShellApplication {
+          name = "emacs-dired-wrapper";
+          text = ''
+            #!/bin/sh
+            emacsclient -c --eval "(dired \"$1\")"
+          '';
+        };
+      in
+      {
+        name = "Emacs Dired";
+        type = "Application";
+        noDisplay = true;
+        exec = "${emacsDiredWrapper}/bin/emacs-dired-wrapper %f";
+        comment = "Emacs Dired Open Directory";
+        mimeType = [ "inode/directory" ];
+      };
   };
 
   programs.bash = {
@@ -31,6 +71,13 @@ rec {
       nix-repl = "nix repl --expr 'import <nixpkgs>{}'";
       nrs = "sudo nixos-rebuild switch -I nixos-config=${home.homeDirectory}/nixos-dotfiles/configuration.nix -I nixpkgs=${home.homeDirectory}/nixpkgs";
     };
+    initExtra = ''
+      # https://unix.stackexchange.com/a/691245
+      t () {
+        rg --files --hidden --ignore --glob '!.git/' "$@" \
+        | tree --fromfile --dirsfirst -a
+      }
+    '';
   };
 
   programs.starship = {
